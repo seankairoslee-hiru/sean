@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이세경T · 지구과학 · 통합과학</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400;
+      color: #1B2A4A;
+      background: #FFFFFF;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── Variables ────────────────────────────────────── */
+    :root {
+      --navy: #1B2A4A;
+      --navy-mid: #243660;
+      --gold: #C9A84C;
+      --gold-dark: #a8872e;
+      --white: #FFFFFF;
+      --bg-alt: #F4F6FB;
+      --border: #E8ECF4;
+      --shadow: 0 4px 24px rgba(27,42,74,0.08);
+      --radius: 10px;
+    }
+
+    /* ─── Scroll Reveal ────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── Navigation ────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(27,42,74,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+    }
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .nav-cta:hover { background: #d9b85c; transform: scale(1.03); }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1B2A4A 0%, #243660 50%, #1e3a5f 100%);
+      display: flex;
+      align-items: center;
+      padding: 100px clamp(20px, 6vw, 80px) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    .hero-taglines {
+      margin-bottom: 28px;
+    }
+    .hero-tagline-item {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hero-tagline-item .gold-word {
+      color: var(--gold);
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .hero-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+    .hero-title .line2 {
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      display: block;
+      margin-top: 8px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .hero-meta-tag {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 15px 32px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+    }
+    .btn-primary:hover { transform: scale(1.03); background: #d9b85c; box-shadow: 0 6px 28px rgba(201,168,76,0.45); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 15px 32px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { transform: scale(1.03); background: rgba(255,255,255,0.14); }
+
+    /* Hero Image Card (glassmorphism) */
+    .hero-image-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-glass-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.12);
+      max-width: 340px;
+      width: 100%;
+    }
+    .hero-glass-card img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.3);
+    }
+    .hero-card-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .hero-card-subject {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gold);
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+    .hero-card-affiliations {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .affiliation-tag {
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+    }
+    .hero-card-edu {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 12px;
+    }
+
+    /* ─── Section Commons ───────────────────────────────── */
+    section {
+      padding: clamp(64px, 9vw, 110px) clamp(20px, 6vw, 80px);
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: #4a5a7a;
+      line-height: 1.8;
+      max-width: 580px;
+    }
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ─── Strengths ─────────────────────────────────────── */
+    #strengths { background: var(--bg-alt); }
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .strength-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .strength-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(27,42,74,0.12); }
+    .strength-icon {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+      line-height: 1;
+    }
+    .strength-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .strength-card p {
+      font-size: 0.9rem;
+      color: #5a6a8a;
+      line-height: 1.75;
+    }
+    .strength-card .gold-accent {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ─── About ──────────────────────────────────────────── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .about-photo {
+      position: relative;
+    }
+    .about-photo img {
+      width: 100%;
+      max-width: 380px;
+      height: 460px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 16px;
+      box-shadow: 0 12px 48px rgba(27,42,74,0.15);
+    }
+    .about-photo-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .about-content h2 {
+      font-size: clamp(1.5rem, 2.8vw, 2rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .about-content h2 .gold { color: var(--gold); }
+    .about-content > p {
+      font-size: 0.97rem;
+      color: #4a5a7a;
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+    .about-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .about-info-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .about-info-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 3px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .about-info-value {
+      font-size: 0.92rem;
+      color: var(--navy);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ─── Courses ────────────────────────────────────────── */
+    #courses { background: var(--bg-alt); }
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .course-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .course-card:hover { transform: translateY(-4px); box-shadow: 0 10px 40px rgba(27,42,74,0.13); }
+    .course-card-header {
+      background: linear-gradient(135deg, var(--navy) 0%, #243660 100%);
+      padding: 32px 32px 28px;
+    }
+    .course-card-badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.2);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .course-card-header h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .course-card-header p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .course-card-body {
+      padding: 28px 32px 32px;
+    }
+    .course-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .course-features li {
+      font-size: 0.9rem;
+      color: #3a4a6a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .course-features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .course-locations {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .course-location-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--bg-alt);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .course-location-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .btn-enroll {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 13px 20px;
+      border-radius: var(--radius);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-enroll:hover { transform: scale(1.03); background: #243660; }
+    .btn-enroll-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-enroll-gold:hover { background: #d9b85c; }
+
+    /* ─── Reviews ────────────────────────────────────────── */
+    #reviews { background: var(--white); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(27,42,74,0.11); }
+    .review-quote-mark {
+      font-size: 3.5rem;
+      line-height: 1;
+      color: rgba(201,168,76,0.25);
+      font-family: Georgia, serif;
+      position: absolute;
+      top: 20px;
+      right: 24px;
+    }
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+    .review-text {
+      font-size: 0.9rem;
+      color: #3a4a6a;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .review-avatar {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--navy), #243660);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .review-author-info .name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .review-author-info .subject {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ─── SNS ────────────────────────────────────────────── */
+    #sns { background: var(--bg-alt); }
+    .sns-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .sns-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sns-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(27,42,74,0.12); }
+    .sns-icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+    .sns-icon-insta { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .sns-icon-kakao { background: #FEE500; }
+    .sns-icon-chat { background: #3A1D1D; }
+    .sns-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .sns-card .sns-handle {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .sns-qr {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 18px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .sns-qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .sns-qr-placeholder {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 18px;
+      border-radius: 8px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: #8a9ab8;
+      text-align: center;
+      padding: 8px;
+    }
+    .btn-sns {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-sns:hover { transform: scale(1.03); opacity: 0.9; }
+    .btn-sns-insta { background: linear-gradient(135deg, #e6683c, #dc2743, #cc2366); color: #fff; }
+    .btn-sns-kakao { background: #FEE500; color: #3A1D1D; }
+    .btn-sns-chat { background: var(--navy); color: #fff; }
+
+    /* ─── Final CTA ──────────────────────────────────────── */
+    #cta {
+      background: linear-gradient(135deg, #1B2A4A 0%, #243660 60%, #1e3a5f 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .cta-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .cta-title .gold { color: var(--gold); }
+    .cta-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+      margin-bottom: 44px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-cta-main {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 17px 38px;
+      min-width: 220px;
+      text-align: center;
+      border-radius: var(--radius);
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 28px rgba(201,168,76,0.4);
+    }
+    .btn-cta-main:hover { transform: scale(1.03); background: #d9b85c; box-shadow: 0 8px 36px rgba(201,168,76,0.5); }
+    .btn-cta-kakao {
+      background: #FEE500;
+      color: #3A1D1D;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 17px 38px;
+      min-width: 220px;
+      text-align: center;
+      border-radius: var(--radius);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-cta-kakao:hover { transform: scale(1.03); opacity: 0.9; }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    footer {
+      background: #111b2e;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 40px 20px;
+    }
+    footer .footer-logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 8px;
+    }
+    footer .footer-logo span { color: var(--gold); }
+    footer p {
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+
+    /* ─── Floating CTA ───────────────────────────────────── */
+    .floating-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .float-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      white-space: nowrap;
+    }
+    .float-btn:hover { transform: scale(1.05); box-shadow: 0 6px 28px rgba(0,0,0,0.28); }
+    .float-kakao { background: #FEE500; color: #3A1D1D; }
+    .float-navy { background: var(--navy); color: var(--white); }
+    .float-btn-icon { font-size: 1.1rem; }
+
+    /* ─── Mobile Hamburger ───────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .hero-tagline-item { justify-content: center; }
+      .hero-meta { justify-content: center; }
+      .hero-buttons { justify-content: center; }
+      .hero-buttons .btn-primary,
+      .hero-buttons .btn-secondary { width: 100%; justify-content: center; }
+      .hero-image-wrap { order: -1; }
+      .hero-glass-card { max-width: 280px; }
+      .strengths-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-photo img { max-width: 100%; height: 320px; }
+      .about-photo-badge { right: 0; bottom: -12px; }
+      .about-info-label { white-space: normal; }
+      .courses-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .sns-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .floating-cta { bottom: 16px; right: 16px; }
+      .float-btn { padding: 12px 18px; font-size: 0.82rem; }
+    }
+    @media (max-width: 600px) {
+      .hero-glass-card img { width: 120px; height: 120px; }
+      .hero-card-name { font-size: 1.2rem; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn-cta-main, .btn-cta-kakao { width: 100%; max-width: 320px; text-align: center; }
+
+      /* 플로팅 CTA: 화면 하단 좌우 가득 차도록 배치 */
+      .floating-cta {
+        bottom: 14px;
+        right: 12px;
+        left: 12px;
+        flex-direction: row;
+        justify-content: stretch;
+        align-items: stretch;
+      }
+      .float-btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.82rem;
+        padding: 12px 10px;
+        border-radius: 10px;
+        white-space: normal;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────── -->
+  <nav>
+    <div class="nav-logo">이세경 <span>지구과학 · 통합과학</span></div>
+    <ul class="nav-links">
+      <li><a href="#strengths">강점</a></li>
+      <li><a href="#about">강사 소개</a></li>
+      <li><a href="#courses">강의 안내</a></li>
+      <li><a href="#reviews">수강 성과</a></li>
+      <li><a href="#sns">SNS</a></li>
+    </ul>
+    <a class="nav-cta" href="http://pf.kakao.com/_xgajNxj" target="_blank">카카오톡 상담</a>
+    <div class="nav-hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-text reveal">
+        <div class="hero-badge">서울대학교 자연과학부(현 지구환경과학부) 졸업</div>
+        <div class="hero-taglines">
+          <div class="hero-tagline-item">
+            <span class="gold-word">"명쾌한"</span>&nbsp;유형 정리
+          </div>
+          <div class="hero-tagline-item">
+            <span class="gold-word">"빠르고"</span>&nbsp;정확한 풀이
+          </div>
+          <div class="hero-tagline-item">
+            <span class="gold-word">"높은"</span>&nbsp;시험 적중률
+          </div>
+        </div>
+        <h1 class="hero-title">
+          이세경T와 함께라면
+          <span class="line2">지구과학 · 통합과학 내신이<br>비약적으로 달라집니다.</span>
+        </h1>
+        <div class="hero-meta">
+          <span class="hero-meta-tag">지구과학</span>
+          <span class="hero-meta-tag">통합과학</span>
+          <span class="hero-meta-tag">고등 내신</span>
+          <span class="hero-meta-tag">시대인재</span>
+          <span class="hero-meta-tag">다원교육</span>
+          <span class="hero-meta-tag">세정학원</span>
+        </div>
+        <div class="hero-buttons">
+          <a class="btn-primary" href="http://pf.kakao.com/_xgajNxj" target="_blank">카카오톡 상담 신청</a>
+          <a class="btn-secondary" href="#courses">강의 안내 보기</a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap reveal reveal-delay-2">
+        <div class="hero-glass-card">
+          <img src="profile.jpg" alt="이세경T 프로필" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div style="display:none;width:160px;height:160px;border-radius:50%;background:rgba(201,168,76,0.2);border:3px solid var(--gold);margin:0 auto 20px;align-items:center;justify-content:center;font-size:2rem;color:var(--gold);">👨‍🏫</div>
+          <div class="hero-card-name">이세경T</div>
+          <div class="hero-card-edu">서울대학교 지구환경과학부</div>
+          <div class="hero-card-subject">지구과학 · 통합과학</div>
+          <div class="hero-card-affiliations">
+            <span class="affiliation-tag">시대인재</span>
+            <span class="affiliation-tag">다원교육</span>
+            <span class="affiliation-tag">세정학원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Strengths ──────────────────────────────────────── -->
+  <section id="strengths">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">Why 이세경T</div>
+        <div class="divider"></div>
+        <h2 class="section-title">이세경T만의 세 가지 강점</h2>
+        <p class="section-desc">단순 암기가 아닌, 원리 이해와 유형 정리로 빠르게 성적을 끌어올립니다.</p>
+      </div>
+      <div class="strengths-grid">
+        <div class="strength-card reveal reveal-delay-1">
+          <div class="strength-icon">📊</div>
+          <h3>유형 정리를 통한<br><span class="gold-accent">명쾌한 개념 정리</span></h3>
+          <p>복잡한 지구과학·통합과학 개념을 체계적인 유형별로 분류하여, 어떤 문제가 나와도 빠르게 접근할 수 있는 사고 체계를 만들어 드립니다.</p>
+        </div>
+        <div class="strength-card reveal reveal-delay-2">
+          <div class="strength-icon">⚡</div>
+          <h3>기존 해설보다<br><span class="gold-accent">빠르고 정확한 풀이</span></h3>
+          <p>시간이 촉박한 시험 상황에서 핵심을 짚어내는 빠른 풀이법을 훈련합니다. 교과서 풀이보다 효율적인 접근으로 실수를 줄입니다.</p>
+        </div>
+        <div class="strength-card reveal reveal-delay-3">
+          <div class="strength-icon">🎯</div>
+          <h3>높은 시험 적중률로<br><span class="gold-accent">비약적인 성적 향상</span></h3>
+          <p>시험 출제 경향을 철저히 분석하여 자주 나오는 포인트를 사전에 집중 학습합니다. 매 시험마다 높은 적중률로 성과를 만들어 냅니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ──────────────────────────────────────────── -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-photo reveal">
+          <img src="profile.jpg" alt="이세경T" onerror="this.style.background='#F4F6FB';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.alt='이세경T'" />
+        </div>
+        <div class="about-content reveal reveal-delay-2">
+          <div class="section-label">강사 소개</div>
+          <div class="divider"></div>
+          <h2>
+            과학을 <span class="gold">쉽고 명확하게</span><br>가르치는 선생님
+          </h2>
+          <p>
+            서울대학교 지구환경과학부에서 쌓은 깊은 전공 지식을 바탕으로, 교과서 밖의 배경 지식까지 연결해 학생들이 진짜 이해할 수 있도록 가르칩니다. 단순 암기가 아닌 원리 중심의 수업으로, 한번 배운 개념은 다시 흔들리지 않습니다.
+          </p>
+          <div class="about-info-list">
+            <div class="about-info-item">
+              <span class="about-info-label">학력</span>
+              <span class="about-info-value">서울대학교 자연과학부(현 지구환경과학부) 졸업</span>
+            </div>
+            <div class="about-info-item">
+              <span class="about-info-label">과목</span>
+              <span class="about-info-value">지구과학 · 통합과학 (고등 내신)</span>
+            </div>
+            <div class="about-info-item">
+              <span class="about-info-label">소속</span>
+              <span class="about-info-value">시대인재 · 다원교육 · 세정학원</span>
+            </div>
+            <div class="about-info-item">
+              <span class="about-info-label">대상</span>
+              <span class="about-info-value">고등학생 내신 (고1 · 고2 · 고3)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Courses ────────────────────────────────────────── -->
+  <section id="courses">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">강의 안내</div>
+        <div class="divider"></div>
+        <h2 class="section-title">수강 신청 안내</h2>
+        <p class="section-desc">통합과학과 지구과학, 두 과목 모두 이세경T와 함께하세요.</p>
+      </div>
+      <div class="courses-grid">
+        <!-- 통합과학 -->
+        <div class="course-card reveal reveal-delay-1">
+          <div class="course-card-header">
+            <div class="course-card-badge">고1 · 내신</div>
+            <h3>통합과학</h3>
+            <p>고1 내신 핵심 과목 — 물질, 생명, 지구, 에너지 전 영역</p>
+          </div>
+          <div class="course-card-body">
+            <ul class="course-features">
+              <li>물리·화학·생명·지구과학 통합 개념 정리</li>
+              <li>단원별 출제 경향 완벽 분석</li>
+              <li>모의고사 · 수행평가 대비 집중 특강</li>
+              <li>빠른 풀이법으로 실전 시간 단축</li>
+              <li>시험 전 적중 예상 문제 제공</li>
+            </ul>
+            <div class="course-locations">
+              <div class="course-location-item">
+                <span class="course-location-name">시대인재</span>
+                <a class="btn-enroll btn-enroll-gold" href="#" style="padding:7px 16px;font-size:0.8rem;display:inline-block;width:auto;">수강 신청 →</a>
+              </div>
+              <div class="course-location-item">
+                <span class="course-location-name">다원교육</span>
+                <a class="btn-enroll btn-enroll-gold" href="#" style="padding:7px 16px;font-size:0.8rem;display:inline-block;width:auto;">수강 신청 →</a>
+              </div>
+              <div class="course-location-item">
+                <span class="course-location-name">세정학원</span>
+                <a class="btn-enroll btn-enroll-gold" href="#" style="padding:7px 16px;font-size:0.8rem;display:inline-block;width:auto;">수강 신청 →</a>
+              </div>
+            </div>
+            <a class="btn-enroll" href="http://pf.kakao.com/_xgajNxj" target="_blank">카카오톡으로 상담하기</a>
+          </div>
+        </div>
+        <!-- 지구과학 -->
+        <div class="course-card reveal reveal-delay-2">
+          <div class="course-card-header">
+            <div class="course-card-badge">고2·3 · 내신</div>
+            <h3>지구과학</h3>
+            <p>지구과학Ⅰ·Ⅱ 내신 완성 — 서울대 전공자의 깊이 있는 수업</p>
+          </div>
+          <div class="course-card-body">
+            <ul class="course-features">
+              <li>지구과학Ⅰ·Ⅱ 전 단원 유형별 정리</li>
+              <li>교과서 외 배경 지식 연계 심화 수업</li>
+              <li>기출 문제 완전 분석 및 변형 대비</li>
+              <li>빠르고 정확한 실전형 풀이법 훈련</li>
+              <li>시험 적중 예상 포인트 집중 점검</li>
+            </ul>
+            <div class="course-locations">
+              <div class="course-location-item">
+                <span class="course-location-name">시대인재</span>
+                <a class="btn-enroll btn-enroll-gold" href="#" style="padding:7px 16px;font-size:0.8rem;display:inline-block;width:auto;">수강 신청 →</a>
+              </div>
+              <div class="course-location-item">
+                <span class="course-location-name">다원교육</span>
+                <a class="btn-enroll btn-enroll-gold" href="#" style="padding:7px 16px;font-size:0.8rem;display:inline-block;width:auto;">수강 신청 →</a>
+              </div>
+              <div class="course-location-item">
+                <span class="course-location-name">세정학원</span>
+                <a class="btn-enroll btn-enroll-gold" href="#" style="padding:7px 16px;font-size:0.8rem;display:inline-block;width:auto;">수강 신청 →</a>
+              </div>
+            </div>
+            <a class="btn-enroll" href="http://pf.kakao.com/_xgajNxj" target="_blank">카카오톡으로 상담하기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Reviews ────────────────────────────────────────── -->
+  <section id="reviews">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">수강 성과</div>
+        <div class="divider"></div>
+        <h2 class="section-title">학생들의 실제 후기</h2>
+        <p class="section-desc">이세경T 수업 후 달라진 학생들의 이야기입니다.</p>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-quote-mark">"</div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">처음엔 지구과학이 너무 어려웠는데, 선생님 수업 듣고 나서 원리가 이해되기 시작했어요. 내신에서 1등급 받았습니다!</p>
+          <div class="review-author">
+            <div class="review-avatar">고2</div>
+            <div class="review-author-info">
+              <div class="name">고2 학생</div>
+              <div class="subject">지구과학 수강</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-quote-mark">"</div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">통합과학 4등급이었는데 선생님 수업 2달 만에 2등급으로 올랐어요. 유형 정리가 정말 도움이 됐어요.</p>
+          <div class="review-author">
+            <div class="review-avatar">고1</div>
+            <div class="review-author-info">
+              <div class="name">고1 학생</div>
+              <div class="subject">통합과학 수강</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal reveal-delay-3">
+          <div class="review-quote-mark">"</div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">서울대 전공자라서 그런지 교과서에 없는 배경 지식까지 알려주셔서 훨씬 깊게 이해하게 됐어요.</p>
+          <div class="review-author">
+            <div class="review-avatar">고3</div>
+            <div class="review-author-info">
+              <div class="name">고3 학생</div>
+              <div class="subject">지구과학 수강</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SNS ────────────────────────────────────────────── -->
+  <section id="sns">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">SNS &amp; 채널</div>
+        <div class="divider"></div>
+        <h2 class="section-title">이세경T 채널 바로가기</h2>
+        <p class="section-desc">강의 정보, 문제 풀이, 학습 팁을 공유합니다. QR 코드로 바로 연결하세요.</p>
+      </div>
+      <div class="sns-grid">
+        <!-- 인스타그램 -->
+        <div class="sns-card reveal reveal-delay-1">
+          <div class="sns-icon-wrap sns-icon-insta">📷</div>
+          <h3>인스타그램</h3>
+          <p class="sns-handle">@sean.kairos</p>
+          <div class="sns-qr">
+            <img src="[QR] 인스타그램.png" alt="인스타그램 QR코드" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='flex'" />
+          </div>
+          <div class="sns-qr-placeholder" style="display:none;">
+            QR 코드<br>인스타그램
+          </div>
+          <a class="btn-sns btn-sns-insta" href="https://instagram.com/sean.kairos" target="_blank">
+            팔로우하기
+          </a>
+        </div>
+        <!-- 카카오톡 채널 -->
+        <div class="sns-card reveal reveal-delay-2">
+          <div class="sns-icon-wrap sns-icon-kakao">💬</div>
+          <h3>카카오톡 채널</h3>
+          <p class="sns-handle">이세경 지구과학/통합과학</p>
+          <div class="sns-qr">
+            <img src="[QR] 카카오톡채널.png" alt="카카오톡 채널 QR코드" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='flex'" />
+          </div>
+          <div class="sns-qr-placeholder" style="display:none;">
+            QR 코드<br>카카오채널
+          </div>
+          <a class="btn-sns btn-sns-kakao" href="http://pf.kakao.com/_xgajNxj" target="_blank">
+            채널 추가하기
+          </a>
+        </div>
+        <!-- 카카오톡 상담 -->
+        <div class="sns-card reveal reveal-delay-3">
+          <div class="sns-icon-wrap sns-icon-chat">🗨️</div>
+          <h3>카카오톡 상담</h3>
+          <p class="sns-handle">seankairos@kakao.com</p>
+          <div class="sns-qr">
+            <img src="[QR] 카카오톡.png" alt="카카오톡 상담 QR코드" onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='flex'" />
+          </div>
+          <div class="sns-qr-placeholder" style="display:none;">
+            QR 코드<br>카카오톡
+          </div>
+          <a class="btn-sns btn-sns-chat" href="https://qr.kakao.com/talk/seankairos" target="_blank">
+            1:1 상담하기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ──────────────────────────────────────── -->
+  <section id="cta">
+    <div class="section-inner cta-inner">
+      <div class="reveal">
+        <h2 class="cta-title">지금 바로 시작하면<br><span class="gold">다음 시험이 달라집니다</span></h2>
+        <p class="cta-desc">내신 1등급을 향한 첫걸음을 내딛으세요.</p>
+        <div class="cta-buttons">
+          <a class="btn-cta-kakao" href="http://pf.kakao.com/_xgajNxj" target="_blank">카카오톡 채널 추가</a>
+          <a class="btn-cta-main" href="https://qr.kakao.com/talk/seankairos" target="_blank">무료 상담 신청하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-logo">이세경T · <span>지구과학 · 통합과학</span></div>
+    <p>시대인재 · 다원교육 · 세정학원</p>
+    <p style="margin-top:8px;">© 2024 이세경T. All rights reserved.</p>
+  </footer>
+
+  <!-- ── Floating CTA ───────────────────────────────────── -->
+  <div class="floating-cta">
+    <a class="float-btn float-navy" href="https://qr.kakao.com/talk/seankairos" target="_blank">
+      <span class="float-btn-icon">📝</span> 무료 상담 신청
+    </a>
+    <a class="float-btn float-kakao" href="http://pf.kakao.com/_xgajNxj" target="_blank">
+      <span class="float-btn-icon">💬</span> 카카오톡 채널
+    </a>
+  </div>
+
+  <!-- ── Scripts ────────────────────────────────────────── -->
+  <script>
+    // Scroll Reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Nav hamburger (mobile)
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      const cta = document.querySelector('.nav-cta');
+      if (links) {
+        const isOpen = links.style.display === 'flex';
+        links.style.display = isOpen ? 'none' : 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '64px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'rgba(27,42,74,0.99)';
+        links.style.padding = '20px 24px';
+        links.style.gap = '16px';
+        if (cta) cta.style.display = isOpen ? 'none' : 'block';
+      }
+    }
+
+    // Nav background on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        nav.style.background = 'rgba(27,42,74,0.99)';
+      } else {
+        nav.style.background = 'rgba(27,42,74,0.97)';
+      }
+    });
+  </script>
+</body>
+</html>

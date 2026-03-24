@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이세경 | 지구과학 · 통합과학 전문 강사</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1a4f7a;
+      --primary-light: #2a6fa8;
+      --accent: #00a896;
+      --dark: #1a1a2e;
+      --gray: #f5f7fa;
+      --gray-mid: #e8ecf0;
+      --text: #2d3748;
+      --text-light: #718096;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── 네비게이션 ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-cta {
+      background: var(--primary);
+      color: var(--white) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--primary-light) !important; color: var(--white) !important; }
+
+    /* ── 히어로 ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f2942 0%, #1a4f7a 50%, #1a6b6b 100%);
+      display: flex;
+      align-items: center;
+      padding: 80px 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,168,150,0.15) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(42,111,168,0.2) 0%, transparent 70%);
+      bottom: -50px; left: 10%;
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,168,150,0.2);
+      border: 1px solid rgba(0,168,150,0.4);
+      color: #4ecdc4;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-badge::before { content: '🎓'; }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+
+    .hero-title span { color: #4ecdc4; }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background: #00c4b0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,168,150,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .hero-image {
+      flex-shrink: 0;
+      width: 320px;
+      height: 380px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image-placeholder {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+    }
+
+    .hero-image-placeholder div { font-size: 3rem; margin-bottom: 0.5rem; }
+
+    /* ── 공통 섹션 ── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    /* ── 소개 섹션 ── */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .about-card {
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+
+    .about-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--gray-mid);
+    }
+
+    .career-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .career-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .career-item p {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .career-item span {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .philosophy-text {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.9;
+    }
+
+    .philosophy-text strong {
+      color: var(--primary);
+    }
+
+    /* ── 강의 섹션 ── */
+    #courses { background: var(--gray); }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .course-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .course-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+
+    .course-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .course-icon.blue { background: rgba(26,79,122,0.1); }
+    .course-icon.teal { background: rgba(0,168,150,0.1); }
+
+    .course-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .course-card p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .tag {
+      background: var(--gray);
+      color: var(--text);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .academy-links { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .academy-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--gray-mid);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      transition: all 0.2s;
+    }
+
+    .academy-link:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    .academy-link span { font-size: 0.75rem; color: inherit; opacity: 0.7; }
+
+    /* ── 성과 섹션 ── */
+    #results { background: var(--white); }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: var(--white);
+    }
+
+    .stat-card .number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .label {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .review-card {
+      background: var(--gray);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .review-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem; left: 1.2rem;
+      font-size: 3rem;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      padding-top: 1rem;
+    }
+
+    .review-author {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .review-stars { color: #f6c90e; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+    /* ── SNS 섹션 ── */
+    #sns { background: var(--gray); }
+
+    .sns-grid {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .sns-card {
+      flex: 1;
+      min-width: 200px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .sns-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+
+    .sns-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .sns-name { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.3rem; }
+    .sns-handle { font-size: 0.85rem; color: var(--text-light); }
+
+    /* ── 최종 CTA ── */
+    #cta {
+      background: linear-gradient(135deg, #0f2942 0%, #1a4f7a 60%, #1a6b6b 100%);
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    #cta .section-label { color: #4ecdc4; }
+
+    #cta .section-title { color: var(--white); max-width: 600px; margin: 0 auto 1rem; }
+
+    #cta .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto 3rem; }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-academy-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .cta-academy-link {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.2s;
+    }
+
+    .cta-academy-link:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 768px) {
+      /* 네비 */
+      .nav-links { display: none; }
+      nav { padding: 0 1.2rem; }
+
+      /* 공통 섹션 */
+      section { padding: 3.5rem 1.2rem; }
+      .section-title { font-size: 1.6rem; }
+      .section-desc { font-size: 0.95rem; }
+
+      /* 히어로 */
+      #hero { padding: 80px 1.2rem 3rem; }
+      .hero-inner { flex-direction: column-reverse; gap: 1.5rem; text-align: center; }
+      .hero-image { width: 160px; height: 200px; }
+      .hero-buttons { justify-content: center; flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; text-align: center; justify-content: center; }
+      .hero-sub { margin: 0 auto 2rem; font-size: 0.95rem; }
+      .hero-badge { font-size: 0.78rem; }
+
+      /* 강점 3가지 */
+      #strengths .section-inner > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.2rem !important;
+      }
+      #strengths .section-inner > div[style*="display:grid"],
+      #strengths .section-inner > div[style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.2rem !important;
+      }
+
+      /* 소개 */
+      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .about-card { padding: 1.5rem; }
+
+      /* 강의 */
+      .courses-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .course-card { padding: 1.8rem; }
+
+      /* 성과 */
+      .stats-row { grid-template-columns: 1fr; gap: 1rem; }
+      .stat-card .number { font-size: 2.2rem; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      /* SNS */
+      .sns-grid { flex-direction: column; gap: 1rem; }
+      .sns-card { min-width: unset; }
+      .sns-card img { width: 80px !important; }
+
+      /* CTA */
+      .cta-academy-links { flex-direction: column; align-items: center; }
+      .cta-academy-link { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 네비게이션 -->
+  <nav>
+    <div class="nav-logo">이세경 지구과학 · 통합과학</div>
+    <ul class="nav-links">
+      <li><a href="#about">강사 소개</a></li>
+      <li><a href="#courses">강의 안내</a></li>
+      <li><a href="#results">수강 성과</a></li>
+      <li><a href="#sns">SNS</a></li>
+      <li><a href="#cta" class="nav-cta">수강 신청</a></li>
+    </ul>
+  </nav>
+
+  <!-- 히어로 -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">서울대학교 자연과학부(현 지구환경과학부) 졸업</div>
+        <p class="hero-sub">
+          <span style="font-size:1.2rem; font-weight:700;"><span style="font-size:1.35rem; color:#4ecdc4;">명쾌한</span> 유형 정리</span><br>
+          <span style="font-size:1.2rem; font-weight:700;"><span style="font-size:1.35rem; color:#ffd166;">빠르고</span> 정확한 풀이</span><br>
+          <span style="font-size:1.2rem; font-weight:700;"><span style="font-size:1.35rem; color:#ff9f43;">높은</span> 시험 적중률</span><br><br>
+          <strong style="color:#4ecdc4">이세경T</strong>와 함께라면<br>
+          지구과학 · 통합과학 내신이 <strong style="color:#4ecdc4">비약적으로</strong> 달라집니다.
+        </p>
+        <div class="hero-buttons">
+          <a href="#cta" class="btn-primary">수강 신청하기 →</a>
+          <a href="#about" class="btn-outline">강사 소개 보기</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="profile.jpg" alt="이세경T">
+      </div>
+    </div>
+  </section>
+
+  <!-- 강점 3가지 -->
+  <section id="strengths" style="background:var(--white); padding:4rem 2rem;">
+    <div class="section-inner">
+      <div class="section-label">WHY 이세경</div>
+      <h2 class="section-title">이세경T만의 세 가지 차별점</h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem;">
+
+        <div style="text-align:center; padding:2.5rem 2rem; border-radius:16px; background:var(--gray); border-top:4px solid var(--accent);">
+          <div style="font-size:2.8rem; margin-bottom:1rem;">📊</div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--dark); margin-bottom:0.8rem;">유형 정리를 통한<br>명쾌한 개념 정리</h3>
+          <p style="font-size:0.9rem; color:var(--text-light); line-height:1.8;">복잡한 내용도 유형별로 체계화하여 한눈에 이해할 수 있도록 정리합니다. 한 번 잡히면 절대 잊어버리지 않습니다.</p>
+        </div>
+
+        <div style="text-align:center; padding:2.5rem 2rem; border-radius:16px; background:var(--gray); border-top:4px solid var(--primary);">
+          <div style="font-size:2.8rem; margin-bottom:1rem;">⚡</div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--dark); margin-bottom:0.8rem;">기존 해설보다<br>빠르고 정확한 풀이</h3>
+          <p style="font-size:0.9rem; color:var(--text-light); line-height:1.8;">전공자만이 알 수 있는 핵심을 꿰뚫는 풀이법으로 시간을 줄이고 정확도를 높입니다. 시험장에서도 바로 적용 가능합니다.</p>
+        </div>
+
+        <div style="text-align:center; padding:2.5rem 2rem; border-radius:16px; background:var(--gray); border-top:4px solid #f6c90e;">
+          <div style="font-size:2.8rem; margin-bottom:1rem;">🎯</div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--dark); margin-bottom:0.8rem;">높은 시험 적중률로<br>비약적인 성적 향상</h3>
+          <p style="font-size:0.9rem; color:var(--text-light); line-height:1.8;">오랜 강의 경력에서 쌓아온 출제 패턴 분석으로 높은 적중률을 자랑합니다. 수강생의 성적 향상이 이를 증명합니다.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 강사 소개 -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">ABOUT</div>
+      <h2 class="section-title">이세경T를 소개합니다</h2>
+      <p class="section-desc" style="margin-top:0.3rem;">전공자만이 알 수 있는 깊이 있는 지식으로, 고등학교 지구과학과 통합과학을 가르칩니다.</p>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>📋 학력 및 경력</h3>
+          <div class="career-item">
+            <div class="career-dot"></div>
+            <div>
+              <p>서울대학교 지구환경과학부 졸업</p>
+              <span>전공 기반의 깊이 있는 강의와 컨텐츠</span>
+            </div>
+          </div>
+          <div class="career-item">
+            <div class="career-dot"></div>
+            <div>
+              <p>시대인재</p>
+            </div>
+          </div>
+          <div class="career-item">
+            <div class="career-dot"></div>
+            <div>
+              <p>다원교육</p>
+            </div>
+          </div>
+          <div class="career-item">
+            <div class="career-dot"></div>
+            <div>
+              <p>세정학원</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="about-card" style="margin-bottom: 1.5rem;">
+            <h3>💡 교육 철학</h3>
+            <p class="philosophy-text">
+              복잡해 보이는 내용도 <strong>유형으로 정리</strong>하면 명쾌해집니다.<br><br>
+              전공자로서 쌓아온 깊은 이해를 바탕으로,
+              기존 해설보다 <strong>빠르고 정확한 풀이</strong>를 제시합니다.<br><br>
+              오랜 강의 경력에서 나오는 <strong>높은 시험 적중률</strong>로
+              학생들의 성적을 비약적으로 끌어올리는 것이
+              이세경T의 목표입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 강의 안내 -->
+  <section id="courses">
+    <div class="section-inner">
+      <div class="section-label">COURSES</div>
+      <h2 class="section-title">강의 안내</h2>
+      <p class="section-desc">고등학교 내신을 완벽하게 대비하는 두 가지 과목을 전문적으로 가르칩니다.</p>
+
+      <div class="courses-grid">
+        <!-- 통합과학 -->
+        <div class="course-card">
+          <div class="course-icon teal">🌍</div>
+          <h3>통합과학</h3>
+          <p>고등학교 1학년 필수 과목인 통합과학을 물리·화학·생명·지구과학의 연결고리를 이해하며 내신 고득점을 목표로 합니다.</p>
+          <div class="course-tags">
+            <span class="tag">고1 내신</span>
+            <span class="tag">개념 이해</span>
+            <span class="tag">문제 풀이</span>
+          </div>
+          <div class="academy-links">
+            <a href="#" class="academy-link">
+              시대인재 <span>수강 신청 →</span>
+            </a>
+            <a href="#" class="academy-link">
+              다원교육 <span>수강 신청 →</span>
+            </a>
+            <a href="#" class="academy-link">
+              세정학원 <span>수강 신청 →</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 지구과학 -->
+        <div class="course-card">
+          <div class="course-icon blue">🔭</div>
+          <h3>지구과학</h3>
+          <p>서울대 지구환경과학부 전공자만이 전달할 수 있는 깊이 있는 개념 이해로 고등학교 지구과학 내신을 완성합니다.</p>
+          <div class="course-tags">
+            <span class="tag">고2·3 내신</span>
+            <span class="tag">전공자 강의</span>
+            <span class="tag">심화 개념</span>
+          </div>
+          <div class="academy-links">
+            <a href="#" class="academy-link">
+              시대인재 <span>수강 신청 →</span>
+            </a>
+            <a href="#" class="academy-link">
+              다원교육 <span>수강 신청 →</span>
+            </a>
+            <a href="#" class="academy-link">
+              세정학원 <span>수강 신청 →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 수강 성과 -->
+  <section id="results">
+    <div class="section-inner">
+      <div class="section-label">RESULTS</div>
+      <h2 class="section-title">수강생 성과</h2>
+      <p class="section-desc">이세경T의 수업을 들은 학생들이 만들어낸 실제 결과입니다.</p>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="number">95%</div>
+          <div class="label">성적 향상 비율<br><small style="opacity:0.6">(수강생 기준)</small></div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #00877a, #00a896);">
+          <div class="number">다수</div>
+          <div class="label">명문대 진학<br><small style="opacity:0.6">(SKY 포함)</small></div>
+        </div>
+        <div class="stat-card">
+          <div class="number">오랜</div>
+          <div class="label">강의 경력<br><small style="opacity:0.6">(검증된 노하우)</small></div>
+        </div>
+      </div>
+
+      <!-- 수강생 후기 -->
+      <h3 style="font-size:1.2rem; font-weight:700; color:var(--dark); margin-bottom:1.5rem;">수강생 후기</h3>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            <!-- 실제 후기로 교체하세요 -->
+            처음엔 지구과학이 너무 어려웠는데, 선생님 수업 듣고 나서 원리가 이해되기 시작했어요. 내신에서 1등급 받았습니다!
+          </p>
+          <div class="review-author">고2 학생 · 지구과학 수강</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            통합과학 4등급이었는데 선생님 수업 2달 만에 2등급으로 올랐어요. 개념 설명이 정말 명확해요.
+          </p>
+          <div class="review-author">고1 학생 · 통합과학 수강</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            서울대 전공자라서 그런지 교과서에 없는 배경 지식까지 알려주셔서 훨씬 깊게 이해하게 됐어요.
+          </p>
+          <div class="review-author">고3 학생 · 지구과학 수강</div>
+        </div>
+      </div>
+      <p style="text-align:center; color:var(--text-light); font-size:0.85rem; margin-top:1rem;">
+        * 위 후기는 예시입니다. 실제 수강생 후기 이미지로 교체해주세요.
+      </p>
+    </div>
+  </section>
+
+  <!-- SNS -->
+  <section id="sns">
+    <div class="section-inner">
+      <div class="section-label">SNS</div>
+      <h2 class="section-title">함께 공부해요</h2>
+      <p class="section-desc">SNS에서 과학 개념 정리, 학습 팁, 강의 소식을 먼저 만나보세요.</p>
+
+      <div class="sns-grid">
+        <a href="https://instagram.com/sean.kairos" class="sns-card" target="_blank">
+          <div class="sns-icon">📸</div>
+          <div class="sns-name">인스타그램</div>
+          <div class="sns-handle">@sean.kairos</div>
+          <img src="[QR] 인스타그램.png" alt="인스타그램 QR" style="width:100px; margin-top:1rem; border-radius:8px;">
+        </a>
+        <a href="http://pf.kakao.com/_xgajNxj" class="sns-card" target="_blank">
+          <div class="sns-icon">💛</div>
+          <div class="sns-name">이세경 지구과학/통합과학</div>
+          <div class="sns-handle">카카오톡 채널</div>
+          <img src="[QR] 카카오톡채널.png" alt="카카오톡 채널 QR" style="width:100px; margin-top:1rem; border-radius:8px;">
+        </a>
+        <a href="https://qr.kakao.com/talk/seankairos" class="sns-card" target="_blank">
+          <div class="sns-icon">💬</div>
+          <div class="sns-name">카카오톡 상담</div>
+          <div class="sns-handle">seankairos@kakao.com</div>
+          <img src="[QR] 카카오톡.png" alt="카카오톡 QR" style="width:100px; margin-top:1rem; border-radius:8px;">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 최종 CTA -->
+  <section id="cta">
+    <div class="section-inner">
+      <div class="section-label">ENROLL NOW</div>
+      <h2 class="section-title">지금 바로<br>수강 신청하세요</h2>
+      <p class="section-desc">서울대 전공자 출신 이세경T와 함께<br>지구과학 · 통합과학 내신을 완성하세요.</p>
+
+      <div class="cta-academy-links">
+        <a href="#" class="cta-academy-link">🏫 시대인재 수강 신청</a>
+        <a href="#" class="cta-academy-link">🏫 다원교육 수강 신청</a>
+        <a href="#" class="cta-academy-link">🏫 세정학원 수강 신청</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <p>© 2025 이세경 지구과학 · 통합과학. All rights reserved.</p>
+    <p style="margin-top:0.4rem;">시대인재 · 다원교육 · 세정학원</p>
+  </footer>
+
+</body>
+</html>
