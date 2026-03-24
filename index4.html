@@ -10,7 +10,7 @@
   <style>
     /* ─── Reset & Base ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
     body {
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 400;
@@ -860,6 +860,7 @@
     }
     @media (max-width: 600px) {
       .section-title { font-size: 1.45rem; }
+      section, .hero-inner, .section-inner { max-width: 100%; overflow-x: hidden; }
       h1, h2, h3, p, span, a { word-break: keep-all; }
       .hero-glass-card img { width: 120px; height: 120px; }
       .hero-card-name { font-size: 1.2rem; }

@@ -26,6 +26,8 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     body {
@@ -892,6 +894,7 @@
     @media (max-width: 600px) {
       #hero { padding: 120px 20px 80px; }
       #strengths, #about, #courses, #results, #sns, #cta { padding: 80px 20px; }
+      section, .hero-inner, .section-inner, .about-inner { max-width: 100%; overflow-x: hidden; }
       .section-title { font-size: 1.45rem; }
       h1, h2, h3, p, span, a { word-break: keep-all; }
 
