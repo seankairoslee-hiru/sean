@@ -836,8 +836,10 @@
 
     /* ─── Responsive ─────────────────────────────────────── */
     @media (max-width: 900px) {
-      #hero { justify-content: center; padding-left: 20px; padding-right: 20px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; margin: 0 auto; }
+      #hero { padding-left: 20px; padding-right: 20px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; width: 100%; max-width: 100%; }
+      .hero-text { max-width: 100%; overflow: hidden; }
+      .hero-image-wrap { max-width: 100%; overflow: hidden; }
       .hero-tagline-item { justify-content: center; }
       .hero-meta { justify-content: center; }
       .hero-buttons { justify-content: center; }
